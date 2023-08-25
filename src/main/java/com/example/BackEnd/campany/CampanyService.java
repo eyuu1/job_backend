@@ -18,7 +18,7 @@ public class CampanyService {
     }
 
 
-    public List<Campany> campanyinfo() {
+    public List<Campany> campanyInfo() {
         return campanyRepository.findAll();
     }
 
