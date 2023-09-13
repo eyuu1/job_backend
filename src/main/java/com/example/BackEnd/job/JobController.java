@@ -5,25 +5,32 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path = "api/v1/job")
 
 public class JobController {
 
-    private final JobService jobService;
-
     @Autowired
-    public JobController(JobService jobService) {
-        this.jobService = jobService;
+     JobService jobservice;
+
+
+    public JobController(JobService jobservice) {
+        this.jobservice = jobservice;
     }
 
-    @GetMapping
+    @GetMapping("/retrive")
     public List<Job> jobInfo(){
-      return jobService.jobInfo();
+      return jobservice.jobInfo();
     }
 
-    @PostMapping
+    @GetMapping("/{jobId}")
+    public List<Job> findJob(@PathVariable("jobId") Long id){
+        return jobservice.findJob(id);
+    }
+
+    @PostMapping("/add")
     public void saveJob(@RequestBody Job job){
-        jobService.saveJob(job);
+        jobservice.saveJob(job);
     }
 }

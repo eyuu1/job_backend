@@ -3,6 +3,8 @@ package com.example.BackEnd.job;
 import jakarta.persistence.*;
 import org.springframework.core.SpringVersion;
 
+import java.net.URL;
+
 @Entity
 @Table
 public class Job {
@@ -17,16 +19,24 @@ public class Job {
     private String description;
     @Column(name = "location")
     private String location;
-//    private String type;
+
+    @Column(name = "jobType")
+    private String jobType;
+
+    @Column(name = "url")
+    private String url;
+
 
 
     public Job() {
     }
 
-    public Job(String title, String description, String location) {
+    public Job(String title, String description, String location , String jobType , String url) {
         this.title = title;
         this.description = description;
         this.location = location;
+        this.jobType = jobType;
+        this.url = url;
     }
 
 
@@ -61,4 +71,12 @@ public class Job {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public String getJobType() {  return jobType; }
+
+    public void setJobType(String jobType) {  this.jobType = jobType;  }
+
+    public String getUrl() {  return url;  }
+
+    public void setUrl(String url) {   this.url = url;  }
 }

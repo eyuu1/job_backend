@@ -18,7 +18,7 @@ public class CampanyController {
         this.campanyService = campanyService;
     }
 
-    @GetMapping
+    @GetMapping("/retrive")
     public List<Campany> campanyInfo() {
       return campanyService.campanyInfo();
     }
