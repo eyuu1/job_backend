@@ -3,6 +3,7 @@ package com.example.BackEnd.jobseeker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,5 +26,18 @@ public class JobSeekerService {
 //            throw new IllegalStateException("email already taken");
 //        }
         jobSeekerRepo.save(jobSeeker);
+    }
+
+    public List<JobSeeker> jobSeekersInfo() {
+        return jobSeekerRepo.findAll();
+    }
+
+    public void deleteJobSeeker(Long jobSeekerId) {
+        boolean exists = jobSeekerRepo.existsById(jobSeekerId);
+
+        if(!exists){
+            throw new IllegalStateException("employee with id "+ jobSeekerId + "doesn't exist");
+        }
+        jobSeekerRepo.deleteById(jobSeekerId);
     }
 }
