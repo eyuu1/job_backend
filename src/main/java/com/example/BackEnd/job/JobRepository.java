@@ -12,8 +12,7 @@ import java.util.Optional;
 public interface JobRepository extends JpaRepository<Job , Long> {
 
     Optional<Job> findById(Long id);
-
-    @Query(value = "SELECT j FROM Job j ORDER BY id DESC LIMIT 5")
+ @Query(value = "SELECT j FROM Job j ORDER BY id DESC LIMIT 5")
     public List<Job> fetchRecentJobs();
 
     @Query(value = "SELECT j FROM Job j WHERE j.status=:val")
@@ -24,6 +23,6 @@ public interface JobRepository extends JpaRepository<Job , Long> {
 
     @Query("SELECT j FROM Job j WHERE "
             + "CONCAT(j.title , j.location)"
-            + " LIKE %?1%")
+            + " LIKE %?1%" )
     public List<Job> findByKeyword(String keyword);
     }

@@ -5,6 +5,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -26,7 +27,7 @@ public class JobController {
     }
 
     @GetMapping("/{jobId}")
-    public List<Job> findJob(@PathVariable("jobId") Long id){
+    public Optional <Job> findById(@PathVariable("jobId") Long id){
         return jobservice.findJob(id);
     }
 

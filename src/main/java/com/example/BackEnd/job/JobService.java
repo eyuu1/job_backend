@@ -20,8 +20,13 @@ public class JobService {
         this.jobRepository = jobRepository;
     }
 
-    public List<Job> findJob(Long id) {
-    return jobRepository.findAll().stream().filter(item -> item.getId() == id).collect(Collectors.toList());
+//    public List<Job> findJob(Long id) {
+//    return jobRepository.findAll().stream().filter(item -> item.getId() == id).collect(Collectors.toList());
+//    }
+
+//    @Override
+    public Optional <Job> findJob(Long id) {
+        return jobRepository.findById(id);
     }
 
     public List<Job> jobInfo(){
