@@ -40,4 +40,9 @@ public class JobSeekerService {
         }
         jobSeekerRepo.deleteById(jobSeekerId);
     }
+
+    public Long countAllJobseekers() {
+        Long allJobseekers = jobSeekerRepo.count();
+        return allJobseekers;
+    }
 }

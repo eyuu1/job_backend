@@ -1,10 +1,12 @@
 package com.example.BackEnd.job;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -33,7 +35,46 @@ public class JobService {
            jobRepository.save(job);
         }
 
+    public List<Job> findRecentJobs(){
+        return jobRepository.fetchRecentJobs();
     }
+
+    public List<Job> findPendingJobs(String status){
+        return jobRepository.fetchPendingJobs(status);
+    }
+
+    @Transactional
+    public void updateJobStatus(Long jobId, String status) {
+        Job job = jobRepository.findById(jobId).orElseThrow(()->new IllegalStateException("job with id "+ jobId + " isn't found"));
+
+        if(status!=null && !status.isEmpty() && !Objects.equals(job.getStatus() , status) ){
+            job.setStatus(status);
+        }
+    }
+
+    public void deleteJob(Long jobId) {
+
+        boolean exists = jobRepository.existsById(jobId);
+
+        if(!exists){
+            throw new IllegalStateException("job with id "+ jobId + "doesn't exist");
+        }
+        jobRepository.deleteById(jobId);
+    }
+
+    public Long countAllJobs() {
+        Long countJobs = jobRepository.count();
+        return countJobs;
+    }
+
+    public List<Job> searchByKeyword(String keyword) {
+        return jobRepository.findByKeyword(keyword);
+    }
+
+//    public Long getActiveJobsCount(){
+//        return jobRepository.getCountOfActiveJobs();
+//    }
+}
 
 
 

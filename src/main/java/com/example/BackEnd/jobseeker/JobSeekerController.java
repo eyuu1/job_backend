@@ -27,6 +27,8 @@ public class JobSeekerController {
         return jobSeekerService.jobSeekersInfo();
     }
 
+    @GetMapping("countjobseekers")
+    public Long countJobseekers(){ return jobSeekerService.countAllJobseekers();  }
     @DeleteMapping(path = "{jobSeekerId}")
     public void deleteJobSeeker(@PathVariable("jobSeekerId") Long jobSeekerId){
         jobSeekerService.deleteJobSeeker(jobSeekerId);

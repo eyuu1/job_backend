@@ -23,6 +23,9 @@ public class CampanyController {
       return campanyService.campanyInfo();
     }
 
+    @GetMapping("countcampanies")
+    public Long countCampanies(){ return campanyService.countAllCampanies();  }
+
     @PostMapping("/add")
     public void registerNewCampany(@RequestBody Campany campany){
         campanyService.addNewCampany(campany);

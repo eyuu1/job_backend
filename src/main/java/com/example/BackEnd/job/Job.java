@@ -1,18 +1,10 @@
 package com.example.BackEnd.job;
 
 import com.example.BackEnd.jobCategory.JobCategory;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import org.springframework.core.SpringVersion;
-import org.springframework.lang.NonNull;
 
-import java.net.URL;
-import java.util.List;
-
-import static jakarta.persistence.FetchType.*;
 
 
 //@Data
@@ -23,7 +15,7 @@ import static jakarta.persistence.FetchType.*;
 public class Job {
 
 
-    //    @Getter
+
     @Id
     @GeneratedValue(generator = "job_gen" , strategy = GenerationType.IDENTITY)
     @SequenceGenerator(name = "job_gen" , sequenceName = "job_seq" , initialValue = 1 , allocationSize = 1)
@@ -40,6 +32,9 @@ public class Job {
 
     @Column(name = "url")
     private String url;
+
+    @Column(name = "status" , columnDefinition = "varchar(255) default 'pending'")
+    private String status;
 
     @JsonIgnore
     @ManyToOne
@@ -58,6 +53,15 @@ public class Job {
         this.jobType = jobType;
         this.url = url;
         this.category=category;
+    }
+
+    public Job(String title, String description, String location , String jobType , String url , String status) {
+        this.title = title;
+        this.description = description;
+        this.location = location;
+        this.jobType = jobType;
+        this.url = url;
+        this.status = status;
     }
 
 
@@ -80,6 +84,9 @@ public class Job {
     public void setJobType(String jobType) {  this.jobType = jobType;  }
 
     public void setUrl(String url) {   this.url = url;  }
+
+    public void setStatus(String status) {  this.status = status;   }
+
 
 
     public JobCategory getJobCategory() {

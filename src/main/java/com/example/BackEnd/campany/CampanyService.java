@@ -34,4 +34,9 @@ public class CampanyService {
 
 
     }
+
+    public Long countAllCampanies() {
+        Long totalCampanies = campanyRepository.count();
+        return totalCampanies;
+    }
 }
