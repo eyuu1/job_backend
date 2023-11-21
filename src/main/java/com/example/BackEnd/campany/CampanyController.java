@@ -26,6 +26,8 @@ public class CampanyController {
     @GetMapping("countcampanies")
     public Long countCampanies(){ return campanyService.countAllCampanies();  }
 
+    @GetMapping("checkcmp")
+    public String checkCmp(){ return "congra finlly workedgit ";  }
     @PostMapping("/add")
     public void registerNewCampany(@RequestBody Campany campany){
         campanyService.addNewCampany(campany);
